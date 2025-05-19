@@ -101,3 +101,4 @@ if command -v xdg-open > /dev/null; then
 else
     msg WARN "xdg-open not found. Please open manually: $URL"
 fi
+
