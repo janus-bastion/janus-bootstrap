@@ -95,3 +95,4 @@ else
 fi
 
 banner "Janus successfully uninstalled."
+ 
