@@ -1,7 +1,7 @@
 name: Scan Docker images with Grype
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 🔧 Déclenchement manuel via bouton
   pull_request:
   push:
     branches: [main]
