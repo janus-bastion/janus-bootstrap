@@ -7,7 +7,7 @@
     <img src="https://github.com/janus-bastion/janus-frontend/blob/main/janus-website/janus-logo.png" alt="Janus Bastion Logo" width="160" height="160" />
   </a>
 
-  <p><em>Janus Bootstrap is a utility for quickly deploying and tearing down the **Janus administrative bastion** environment. It automates the setup and cleanup of the entire Janus infrastructure using Docker and Git, allowing administrators to start or stop work in seconds.
+  <p><em>Janus Bootstrap is a utility for quickly deploying and tearing down the Janus administrative bastion environment. It automates the setup and cleanup of the entire Janus infrastructure using Docker and Git, allowing administrators to start or stop work in seconds.
 </em></p>
 
   <table align="center">
