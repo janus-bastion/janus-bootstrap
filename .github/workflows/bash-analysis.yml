@@ -1,0 +1,34 @@
+name: Bash script analysis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  bash-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install ShellCheck and shfmt
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          curl -sSLo shfmt https://github.com/mvdan/sh/releases/latest/download/shfmt_linux_amd64
+          chmod +x shfmt
+          sudo mv shfmt /usr/local/bin/shfmt
+
+      - name: Run ShellCheck
+        run: |
+          echo "Linting with ShellCheck..."
+          shellcheck janus-init.sh
+          shellcheck janus-deinit.sh
+
+      - name: Run shfmt (format checker)
+        run: |
+          echo "Checking formatting with shfmt..."
+          shfmt -d janus-init.sh
+          shfmt -d janus-deinit.sh
