@@ -79,8 +79,8 @@ fi
 msg INFO "Removing repositories..."
 for repo in "${REPOS[@]}"; do
     if [ -d "$WORKDIR/$repo" ]; then
-        rm -rf "$WORKDIR/$repo"
-        msg SUCCESS "Removed $repo."
+        rm -rf "${WORKDIR:?}/${repo:?}"
+	msg SUCCESS "Removed $repo."
     else
         msg DEBUG "$repo not found. Skipping."
     fi
