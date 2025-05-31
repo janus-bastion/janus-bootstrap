@@ -9,14 +9,9 @@ RESET=$(tput sgr0)
 
 WORKDIR="janus-workspace"
 REPOS=(
-  "janus-core"
   "janus-frontend"
-  "janus-cli"
   "janus-infra"
-  "janus-devops"
   "janus-monitoring"
-  "janus-docs"
-  "janus-vault"
 )
 
 msg() {
@@ -71,7 +66,7 @@ else
     msg INFO "Checking Docker volume 'janus-infra_mysql_data'..."
     if docker volume inspect janus-infra_mysql_data > /dev/null 2>&1; then
         msg WARN "Volume exists. Removing..."
-        docker volume rm janus-infra_mysql_data &> /dev/null
+        docker volume rm janus-infra_mysql_data
         msg SUCCESS "Volume removed."
     else
         msg DEBUG "Volume does not exist. Skipping removal."
@@ -92,6 +87,8 @@ msg SUCCESS "Found janus-haproxy IP: $HAPROXY_IP"
 URL="https://$HAPROXY_IP:8445"
 
 banner "Janus is accessible at: $URL"
+
+sleep 3
 
 if command -v xdg-open > /dev/null; then
     msg INFO "Attempting to open browser..."

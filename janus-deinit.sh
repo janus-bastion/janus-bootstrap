@@ -9,14 +9,9 @@ RESET=$(tput sgr0)
 
 WORKDIR="$HOME/janus-workspace"
 REPOS=(
-  "janus-core"
   "janus-frontend"
-  "janus-cli"
   "janus-infra"
-  "janus-devops"
   "janus-monitoring"
-  "janus-docs"
-  "janus-vault"
 )
 
 msg() {
