@@ -84,7 +84,7 @@ HAPROXY_IP=$(docker inspect janus-haproxy | grep '"IPAddress":' | grep -oE '[0-9
 
 msg SUCCESS "Found janus-haproxy IP: $HAPROXY_IP"
 
-URL="https://$HAPROXY_IP:8445"
+URL="https://$HAPROXY_IP:8445/login"
 
 banner "Janus is accessible at: $URL"
 
