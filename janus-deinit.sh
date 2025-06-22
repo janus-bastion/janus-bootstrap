@@ -73,6 +73,14 @@ fi
 
 msg INFO "Removing repositories..."
 for repo in "${REPOS[@]}"; do
+
+msg INFO "Removing Docker image imtjanus/janus-php:8.2-fpm..."
+if docker image inspect imtjanus/janus-php:8.2-fpm > /dev/null 2>&1; then
+    docker image rm imtjanus/janus-php:8.2-fpm
+    msg SUCCESS "Docker image removed."
+else
+    msg DEBUG "Docker image not found. Skipping."
+fi
     if [ -d "$WORKDIR/$repo" ]; then
         rm -rf "${WORKDIR:?}/${repo:?}"
 	msg SUCCESS "Removed $repo."
