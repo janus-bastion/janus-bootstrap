@@ -74,21 +74,27 @@ fi
 msg INFO "Removing repositories..."
 for repo in "${REPOS[@]}"; do
 
-msg INFO "Removing Docker image imtjanus/janus-php:8.2-fpm..."
 if docker image inspect imtjanus/janus-php:8.2-fpm > /dev/null 2>&1; then
     docker image rm imtjanus/janus-php:8.2-fpm
-    msg SUCCESS "Docker image removed."
+    msg SUCCESS "Docker image imtjanus/janus-php:8.2-fpm removed."
 else
-    msg DEBUG "Docker image not found. Skipping."
+    msg DEBUG "Docker image imtjanus/janus-php:8.2-fpm not found. Skipping."
 fi
-    if [ -d "$WORKDIR/$repo" ]; then
-        rm -rf "${WORKDIR:?}/${repo:?}"
-	msg SUCCESS "Removed $repo."
-    else
-        msg DEBUG "$repo not found. Skipping."
-    fi
-done
 
+if docker image inspect imtjanus/janus-core:latest > /dev/null 2>&1; then
+    docker image rm imtjanus/janus-core:latest
+    msg SUCCESS "Docker image imtjanus/janus-core:latest removed."
+else
+    msg DEBUG "Docker image imtjanus/janus-core:latest not found. Skipping."
+fi
+
+# Remove repo directory
+if [ -d "$WORKDIR/$repo" ]; then
+    rm -rf "${WORKDIR:?}/${repo:?}"
+    msg SUCCESS "Removed $repo."
+else
+    msg DEBUG "$repo not found. Skipping."
+fi
 msg INFO "Cleaning up workspace directory if empty..."
 if [ -z "$(ls -A "$WORKDIR")" ]; then
     rmdir "$WORKDIR"
