@@ -57,6 +57,7 @@ msg INFO "Stopping and removing Janus infrastructure..."
 if docker compose -f "$WORKDIR/janus-infra/janus-compose.yaml" ps > /dev/null 2>&1; then
     cd "$WORKDIR/janus-infra"
     docker compose -f janus-compose.yaml down
+    docker rm -f janus-mysql-replica
     msg SUCCESS "Infrastructure stopped and removed."
     cd "$HOME"
 else
