@@ -79,19 +79,6 @@ else
     cd ..
 fi
 
-msg INFO "Setting up database replication..."
-REPLICATION_SCRIPT="$HOME/$WORKDIR/janus-infra/janus-db/janus-replication.sh"
-#WATCH_SCRIPT="$HOME/janus-workspace/janus-infra/janus-db/janus-watch-sync.sh"
-
-[ -x "$REPLICATION_SCRIPT" ] && "$REPLICATION_SCRIPT" setup && \
-    msg SUCCESS "Database replication configured." || \
-    (msg WARN "Script not executable. Trying with bash..." && \
-     bash "$REPLICATION_SCRIPT" setup && \
-     msg SUCCESS "Database replication configured." || \
-     msg ERROR "Failed to configure database replication.")
-
-#nohup bash "$WATCH_SCRIPT" > /root/janus-workspace/janus-watch.log 2>&1 &
-
 msg INFO "Retrieving janus-haproxy IP..."
 HAPROXY_IP=$(docker inspect janus-haproxy | grep '"IPAddress":' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | head -n1)
 
